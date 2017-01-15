@@ -1,5 +1,6 @@
-# Colorful Image Colorization - William H. Guss, Utkarsh Singhal
-An article made for O'Reilley on the neural colorization paper by http://richzhang.github.io/colorization/. To preview the iPython notebook version of the article open [article.ipynb](article.ipynb). The following are necessary requirements to run the notebook on your machine.
+# Colorful Image Colorization Article - William H. Guss, Utkarsh Singhal
+![Example](http://i.imgur.com/dPi1o1W.png)
+An article made for O'Reilley on the [neural colorization paper](http://richzhang.github.io/colorization/) by Richard Zhang, Phillip Isola, and Alexei A. Efros. To preview the iPython notebook version of the article open [article.ipynb](article.ipynb). The following are necessary requirements to run the notebook on your machine.
 
 ## Requirements
 * [python3](https://www.python.org/downloads/)
