@@ -19,7 +19,7 @@ def uniform_random_tensor(shape, name="weights"):
 
 def conv2d(input_tensor, 
        input_channels, output_channels, kernel_size,  
-       pad=0, stride=1, dialation=1, activation=tf.nn.relu, name="conv", custom_weights=None): 
+       pad=0, stride=1, dilation=1, activation=tf.nn.relu, name="conv", custom_weights=None): 
   """
   Builds a convolution layer.
   """
@@ -40,7 +40,7 @@ def conv2d(input_tensor,
     if dilation == 1:
       convolution = tf.nn.conv2d(padded_input, weights, stride, padding="VALID")
     else:
-      convolution = tf.nn.atrous_conv2d(padded_input, weights,  dialation, padding="VALID")
+      convolution = tf.nn.atrous_conv2d(padded_input, weights,  dilation, padding="VALID")
 
 
     # TODO: Add a bias vector:
