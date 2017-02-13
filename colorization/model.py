@@ -10,6 +10,8 @@ import numpy as np
 
 import colorization.architecture
 
+from colorization.utils import conv2d
+
 class ColorizationModel:
 	"""
 	The colorization model.
@@ -53,11 +55,22 @@ class ColorizationModel:
 		# TODO: Preprocessing
 		preprocessed_image = input_placeholder
 
-		ab_color_dist = colorization.architecture.construct(preprocessed_image)
+		self.conv_8_313 = colorization.architecture.construct(preprocessed_image)
 
+		with tf.variable_scope("deploy"):
+			pts_in_hull = ('./resources/pts_in_hull.npy')
+			scaled_conv = self.conv_8_313*2.606
+			distribution = tf.nn.softmax(scaled_conv)
+			color_map = conv2d(distribution,
+				input_channels=313,
+				output_channels=2,
+				kernel_size=1,
+				pad=1,
+				stride=1,
+				custom_weights=pts_in_hull.transpose((1,0)))
 
 		# TODO: We need also return the conversion version.
-		return ab_color_dist
+		return input_placeholder, color_map
 
 
 	def feed(self, image):
@@ -79,7 +92,7 @@ class ColorizationModel:
 		return Trainer(
 			self.sess,
 			self.input_placeholder,
-			self.output_tensor,
+			self.conv_8_313,
 			datasource)
 		
 
